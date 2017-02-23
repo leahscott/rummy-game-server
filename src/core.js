@@ -26,16 +26,30 @@ export function shuffle(state) {
   return state.update('deck', () => deck.sort(() => Math.random()));
 }
 
-export function drawFromStock(state) {
+export function deal(state) {
+  const players = state.get('players');
+
+  var hands = Map();
+  var deck = state.get('deck');
+
+  players.forEach((player) => {
+    const cards = deck.take(10);
+
+    deck = deck.skip(10);
+    hands = hands.set(player, cards);
+  });
+
+  return state.merge({
+    deck: deck,
+    hands : hands
+  });
+}
+
+export function drawFromStock(state, player) {
   const stock = state.get('deck');
-  const player = state.get('currentPlayer');
-  const isFirstTurn = !state.hasIn(['hands', player]);
-  const numToDraw = isFirstTurn ? 10 : 1;
+  const nextState = addToHand(state, player, stock.take(1));
 
-  const cardsDrawn = stock.take(numToDraw);
-  const nextState = addToHand(state, player, cardsDrawn);
-
-  return nextState.update('deck', deck => deck.skip(numToDraw));
+  return nextState.update('deck', deck => deck.skip(1));
 }
 
 export function drawFromDiscard(state) {
