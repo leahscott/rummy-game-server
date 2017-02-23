@@ -2,11 +2,11 @@ import {fromJS, List, Map} from 'immutable';
 import {expect} from 'chai';
 import {createDeck, setDeck, shuffle} from '../src/core';
 
-describe('deck suite', function() {
+describe('deck suite', () => {
 
-  describe('createDeck', function() {
+  describe('createDeck', () => {
 
-    it('creates a new deck of 52 cards', function() {
+    it('creates a new deck of 52 cards', () => {
       const newDeck = createDeck();
       expect(newDeck.length).to.equal(52);
     });
@@ -14,9 +14,9 @@ describe('deck suite', function() {
   });
 
   
-  describe('setDeck', function() {
+  describe('setDeck', () => {
 
-    it('attaches a new deck to the state', function() {
+    it('attaches a new deck to the state', () => {
       const state = Map();
       const deck = createDeck();
       const deckState = setDeck(state, deck);
@@ -25,9 +25,9 @@ describe('deck suite', function() {
     
   });
 
-  describe('shuffle', function() {
+  describe('shuffle', () => {
 
-    it('shuffles cards in the state\'s deck', function() {
+    it('shuffles cards in the state\'s deck', () => {
       const state = fromJS({ deck: createDeck() });
       const shuffledState = shuffle(state);
       expect(state).to.not.equal(shuffledState);

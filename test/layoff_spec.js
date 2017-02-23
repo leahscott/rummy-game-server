@@ -3,9 +3,9 @@ import {expect} from 'chai';
 
 import { layoff } from '../src/core';
 
-describe('layoff suite', function () {
+describe('layoff suite', () => {
 
-  describe('when making a valid layoff onto a set', function () {
+  describe('when making a valid layoff onto a set', () => {
     const state = fromJS({
       melds: [{
         cards: [
@@ -24,7 +24,7 @@ describe('layoff suite', function () {
 
     const nextState = layoff(state, meld, card);
 
-    it('the card is added to the existing meld', function () {
+    it('the card is added to the existing meld', () => {
       expect(nextState.getIn(['melds', 0])).to.equal(fromJS({
           cards: [
             { suit: 'diamonds', value: 3, owner: 'computer' },
@@ -37,16 +37,16 @@ describe('layoff suite', function () {
       )
     });
 
-    it('the card is assigned the correct ownership', function () {
+    it('the card is assigned the correct ownership', () => {
       expect(nextState.getIn(['melds', 0, 'cards']).last()).to.have.property('owner', 'human');
     });
 
-    it('the card is deleted from the current player\'s hand', function () {
+    it('the card is deleted from the current player\'s hand', () => {
       expect(nextState.getIn(['hands', 'human'])).to.equal(List());
     });
   });
 
-  describe('when making a valid layoff onto a run', function () {
+  describe('when making a valid layoff onto a run', () => {
     const state = fromJS({
       melds: [
         {
@@ -67,7 +67,7 @@ describe('layoff suite', function () {
 
     const nextState = layoff(state, meld, card);
 
-    it('the card is added to the existing meld', function () {
+    it('the card is added to the existing meld', () => {
       expect(nextState.getIn(['melds', 0])).to.equal(fromJS({
         cards: [
           { suit: 'diamonds', value: 4, owner: 'human' },
@@ -79,17 +79,17 @@ describe('layoff suite', function () {
       }));
     });
 
-    it('the card is assigned the correct ownership', function () {
+    it('the card is assigned the correct ownership', () => {
       expect(nextState.getIn(['melds', 0, 'cards']).last()).to.have.property('owner', 'human');
     });
 
-    it('the card is deleted from the current player\'s hand', function () {
+    it('the card is deleted from the current player\'s hand', () => {
       expect(nextState.getIn(['hands', 'human'])).to.equal(List());
     });
 
   });
 
-  describe('when layoff is invalid', function () {
+  describe('when layoff is invalid', () => {
     const state = fromJS({
       melds: [
         {
@@ -110,7 +110,7 @@ describe('layoff suite', function () {
 
     const nextState = layoff(state, meld, card);
     
-    it('the current state is returned', function () {
+    it('the current state is returned', () => {
       expect(nextState).to.equal(state);
     });
 

@@ -2,9 +2,9 @@ import {fromJS, List, Map} from 'immutable';
 import {expect} from 'chai';
 import {score} from '../src/core';
 
-describe('scoring suite', function () {
+describe('scoring suite', () => {
   
-  it('should correctly score the melded cards for each user', function () {
+  it('should correctly score the melded cards for each user', () => {
     const state = fromJS({
       hands: {},
       melds: [
@@ -42,7 +42,7 @@ describe('scoring suite', function () {
     }));
   });
 
-  it('should subtract any hands from their user\'s score', function () {
+  it('should subtract any hands from their user\'s score', () => {
     const state = fromJS({
       hands: { 
         computer: [{suit:'clubs',value:9},{suit:'clubs',value:1}],
@@ -82,7 +82,7 @@ describe('scoring suite', function () {
     }));
   });
 
-  it('should declare a winner', function () {
+  it('should declare a winner', () => {
     const state = fromJS({
       hands: { 
         computer: [{suit:'clubs',value:9},{suit:'clubs',value:1}],
